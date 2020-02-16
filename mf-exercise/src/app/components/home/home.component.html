@@ -1,0 +1,40 @@
+<div class="home-screen">
+  <div class="header">
+    <div class="page-title">Home</div>
+    <div class="login-nav">
+      <div *ngIf="!loggedInUser">
+        <span>Your are not logged in</span>
+        <button type="button" class="btn btn-sm" role="button" (click)="login()">Log In</button>
+      </div>
+      <div *ngIf="loggedInUser">
+        <span>Welcome, {{loggedInUserName}}!</span>
+        <button type="button" class="btn btn-sm" role="button" (click)="newPost()">New Post</button>
+        <button type="button" class="btn btn-sm" role="button" (click)="logout()">Log Out</button>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="valid-msg" *ngIf="validationMsg">{{validationMsg}}</div>
+    <table>
+      <tr class="col">
+        <th style="width: 18%">User</th>
+        <th>Post</th>
+      </tr>
+      <tr *ngFor="let user of displayUserPostInfo">
+        <td>
+          <div>{{user.name}}</div>
+          <div class="link" (click)="goToLink(user.website)">{{user.companyName}}</div>
+        </td>
+        <td>
+          <div class="title" [ngClass]="{'link' : loggedInUserName == user.userName}"
+          (click)="loggedInUserName == user.userName ? editPost(user) : return;">{{user.title}}</div>
+          <div>{{user.body}}</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class='nav'>
+    <button (click)="previousPage()" class="prev-icon" [disabled]="disablePrev"></button>
+    <button (click)="nextPage()" class="next-icon" [disabled]="disableNext"></button>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="header edit-page">
+  <div class="page-title">{{postTitle}}</div>
+  <span class="link" (click)="backToHome()">Go back to Home page</span>
+  <span>Welcome, {{loggedInUserName}}!</span>
+</div>
+<div class="add-form">
+  <form [formGroup]="addEditForm" (ngSubmit)="onSubmit($event)">
+  <div>
+    <div class="field-title">Title</div>
+    <input type="text" [ngClass]="{'error' : addEditForm.get('titleMsg').hasError('maxlength')}" 
+    formControlName="titleMsg" (input)="checkFormValidaiton()">
+    <div *ngIf="addEditForm.get('titleMsg').hasError('maxlength')" class="form-errors-text">
+      The title cannot exceed more than 200 characters!
+    </div>
+    <div class="field-title">Message</div>
+    <textarea [ngClass]="{'error' : addEditForm.get('bodyMsg').hasError('maxlength')}"
+    formControlName="bodyMsg" (input)="checkFormValidaiton()"></textarea>
+    <div *ngIf="addEditForm.get('bodyMsg').hasError('maxlength')" class="form-errors-text">
+      Message cannot be longer than 2000 characters!
+    </div>
+  </div>
+  <div class='form-btn'>
+    <button type="button" class="btn btn-sm login-btn" *ngIf="postTitle == 'Edit Post'"
+     role="button" (click)="delete($event)">delete</button>
+    <button type="button" class="btn btn-sm login-btn left" [disabled]="!enableButtons" role="button"
+    (click)="backToHome()">Cancel</button>
+    <button type="submit" class="btn btn-sm login-btn left" [disabled]="!enableButtons"
+     role="button">Save</button>
+  </div>
+</form>
+</div>

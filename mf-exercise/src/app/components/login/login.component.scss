@@ -1,0 +1,15 @@
+.login-form {
+    top: 50%;
+    left: 40%;
+    position: fixed;
+    span {
+        font-weight: bold;
+    }
+    input {
+        width: 250px;
+    }
+    .login-btn {
+        float: right;
+        margin: 10px 0;
+    }
+}
